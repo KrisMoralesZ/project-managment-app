@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
   private
   def set_current_account
-    account = Account.find_by(subdomain: request.subdomain)
-    set_current_tenant(account)
+    organization = Organization.find_by(subdomain: request.subdomain)
+    set_current_tenant(organization)
   end
 end

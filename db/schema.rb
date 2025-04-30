@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_29_194507) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_30_010545) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -26,15 +26,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_29_194507) do
     t.string "organization_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "tenant_id", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "tenant_id"
+    t.string "subdomain"
     t.index ["email"], name: "index_organizations_on_email", unique: true
     t.index ["reset_password_token"], name: "index_organizations_on_reset_password_token", unique: true
-    t.index ["tenant_id"], name: "index_organizations_on_tenant_id"
+    t.index ["subdomain"], name: "index_organizations_on_subdomain", unique: true
   end
 
   create_table "tenants", force: :cascade do |t|
@@ -61,6 +62,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_29_194507) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "organizations", "tenants"
   add_foreign_key "users", "accounts"
 end

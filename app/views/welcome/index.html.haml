@@ -1,0 +1,23 @@
+%div.jumbotron
+  %p.lead You'll love managing your project with our SaaS application. Please take a look at our great plans
+
+%div.w-75.d-flex.jusitfy-content-center.align-items-center.justify-content-around.mx-auto.mt-5
+  %div.card.card-width
+    %div.card-body
+      %p.card-title Free Plan
+      %ul
+        %li.card-text Unlimited file uploads
+        %li.card-text Responsive design
+        %li.card-text Access anywhere
+        %li.card-text 1 project
+      = link_to 'Sign up now!', new_user_registration_path, class: 'btn btn-primary'
+
+  %div.card.card-width
+    %div.card-body
+      %p.card-title Premium Plan
+      %ul
+        %li.card-text Unlimited file uploads
+        %li.card-text Responsive design
+        %li.card-text Access anywhere
+        %li.card-text Unlimited projects
+      = link_to 'Sign up now!', new_user_registration_path, class: 'btn btn-primary'

@@ -25,7 +25,7 @@ class Organizations::RegistrationsController < Devise::RegistrationsController
           end
         end
       else
-        redirect_to root_url(subdomain: resource.subdomain, protocol: request.protocol),
+        redirect_to organization_root_url(subdomain: resource.subdomain, protocol: request.protocol),
                     allow_other_host: true,
                     notice: "Organization created successfully."
       end

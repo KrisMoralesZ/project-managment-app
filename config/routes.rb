@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "dashboard/index"
   devise_for :organizations, controllers: {
     registrations: "organizations/registrations"
   }
@@ -11,7 +12,7 @@ Rails.application.routes.draw do
     scope module: "organizations" do
       root to: "dashboard#index", as: :organization_root
 
-      resources :users, only: [:index, :new, :create, :destroy] # admin gestiona usuarios
+      resources :users, only: [ :index, :new, :create, :destroy ]
     end
   end
 

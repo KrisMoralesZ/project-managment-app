@@ -17,7 +17,10 @@
     = javascript_include_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js", "data-turbo-track": "reload", defer: true
     = javascript_importmap_tags
   %body
-    = render "layouts/navigation"
+    = if organization_signed_in?
+      = render "layouts/navigation"
+    = if user_signed_in?
+      = render "layouts/users_navigation"
     %p.notice= notice
     %p.alert= alert
     %div.container

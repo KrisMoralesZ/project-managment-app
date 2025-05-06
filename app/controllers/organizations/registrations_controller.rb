@@ -9,6 +9,7 @@ class Organizations::RegistrationsController < Devise::RegistrationsController
         User.create!(
           email: resource.email,
           password: params[:organization][:password],
+          role: :admin
           )
       end
 

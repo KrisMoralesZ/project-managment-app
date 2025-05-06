@@ -9,23 +9,25 @@ class Organizations::RegistrationsController < Devise::RegistrationsController
         User.create!(
           email: resource.email,
           password: params[:organization][:password],
-        )
+          )
       end
 
       sign_up(resource_name, resource)
 
-      respond_to do |format|
-        format.html do
-          redirect_to root_url(subdomain: resource.subdomain),
-                      notice: "Organization created successfully."
+      if turbo_frame_request?
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.replace(
+              "form",
+              partial: "organizations/success",
+              locals: { organization: resource }
+            )
+          end
         end
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            "form",
-            partial: "organizations/success",
-            locals: { organization: resource }
-          )
-        end
+      else
+        redirect_to root_url(subdomain: resource.subdomain, protocol: request.protocol),
+                    allow_other_host: true,
+                    notice: "Organization created successfully."
       end
     else
       clean_up_passwords resource
@@ -49,7 +51,7 @@ class Organizations::RegistrationsController < Devise::RegistrationsController
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(
       :sign_up,
-      keys: [:organization_name, :subdomain]
+      keys: [ :organization_name, :subdomain ]
     )
   end
 end

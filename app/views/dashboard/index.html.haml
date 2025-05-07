@@ -1,2 +1,41 @@
-%h1 Dashboard#index
-%p Find me in app/views/dashboard/index.html.haml
+%section.dashboard
+  %h1 Welcome to Administration Panel
+
+  %p
+    Organization:
+    %strong= current_organization.organization_name
+
+  %p
+    Subdomaino:
+    %code= current_organization.subdomain
+
+  %p
+    Session started by:
+    -# %strong= current_user.name
+    -# (rol: #{current_user.role})
+
+  %hr/
+
+  %h2 Users in this organization
+  %h4 Add Users
+  = link_to "New user", new_user_path, class: "btn btn-primary"
+
+  - if @users.present?
+    %table
+      %thead
+        %tr
+          %th Nombre
+          %th Email
+          %th Rol
+          %th Acciones
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= "#{user.name} #{user.last_name}"
+            %td= user.email
+            %td= user.role
+            %td
+              - unless user == current_user
+                = button_to 'Eliminar', user_path(user), method: :delete, data: { confirm: '¿Estás seguro?' }, class: "btn btn-danger"
+  - else
+    %p You dont have users in this organization

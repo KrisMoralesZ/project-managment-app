@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
+  resources :users, only: [:index, :new, :create, :destroy]
+
   constraints subdomain: /.+/ do
     scope module: "organizations" do
       root to: "dashboard#index", as: :organization_root

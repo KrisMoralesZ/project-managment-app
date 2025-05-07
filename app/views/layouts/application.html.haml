@@ -17,12 +17,7 @@
     = javascript_include_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js", "data-turbo-track": "reload", defer: true
     = javascript_importmap_tags
   %body
-    = if organization_signed_in? && is_admin?
-      = render "layouts/navigation"
-    = button_to "Logout", destroy_organization_session_path, method: :delete, class: "btn btn-danger ps-2"
-
-    -# = if user_signed_in? && is_admin?
-    -#   = render "layouts/users_navigation"
+    = render "layouts/navigation"
     %p.notice= notice
     %p.alert= alert
     %div.container

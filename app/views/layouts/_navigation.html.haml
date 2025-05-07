@@ -1,4 +1,4 @@
-.container-fluid
+= if organization_signed_in? && current_organization.subdomain.present?
   %nav.navbar.navbar-expand-lg.bg-light
     .container.d-flex.flex-row
       %a.navbar-brand{:href => "/"}

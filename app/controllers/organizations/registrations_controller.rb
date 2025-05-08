@@ -12,23 +12,9 @@ class Organizations::RegistrationsController < Devise::RegistrationsController
           )
       end
 
+      redirect_to root_url(subdomain: resource.subdomain), allow_other_host: true, notice: "Organization created successfully."
       sign_up(resource_name, resource)
 
-      if turbo_frame_request?
-        respond_to do |format|
-          format.turbo_stream do
-            render turbo_stream: turbo_stream.replace(
-              "form",
-              partial: "organizations/success",
-              locals: { organization: resource }
-            )
-          end
-        end
-      else
-        redirect_to organization_root_url(subdomain: resource.subdomain, protocol: request.protocol),
-                    allow_other_host: true,
-                    notice: "Organization created successfully."
-      end
     else
       clean_up_passwords resource
       set_minimum_password_length

@@ -2,7 +2,7 @@ class User < ApplicationRecord
   belongs_to :organization
   acts_as_tenant(:organization)
 
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
   # enum :role [admin: 0, member: 1]

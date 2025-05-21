@@ -1,0 +1,11 @@
+= form_with url: invite_user_path, method: :post, local: true do |f|
+  .field
+    = f.label :name, "Name"
+    = f.text_field :name
+  .field
+    = f.label :email, "Email"
+    = f.email_field :email
+  .field
+    = f.label :role, "Rol"
+    = f.select :role, options_for_select([["Member", 1], ["Admin", 0]])
+  = f.submit "Invite User"

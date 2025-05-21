@@ -7,10 +7,12 @@ Rails.application.routes.draw do
   }
 
   devise_for :users, controllers: {
-    registrations: "users/registrations"
+    registrations: "users/registrations",
+    invitations: 'users/invitations'
   }
 
   get "dashboard", to: "dashboard#index"
+  post 'invite_user', to: 'users#invite', as: :invite_user
 
   constraints subdomain: /.+/ do
     scope module: "organizations" do

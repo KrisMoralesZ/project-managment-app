@@ -6,7 +6,7 @@
     %strong= current_organization.organization_name
 
   %p
-    Subdomaino:
+    Subdomain:
     %code= current_organization.subdomain
 
   %p
@@ -18,16 +18,16 @@
 
   %h2 Users in this organization
   %h4 Add Users
-  = link_to "New user", new_user_path, class: "btn btn-primary"
+  = render "new_user_form"
 
   - if @users.present?
     %table
       %thead
         %tr
-          %th Nombre
+          %th Name
           %th Email
           %th Rol
-          %th Acciones
+          %th Actions
       %tbody
         - @users.each do |user|
           %tr
@@ -36,6 +36,6 @@
             %td= user.role
             %td
               - unless user == current_user
-                = button_to 'Eliminar', user_path(user), method: :delete, data: { confirm: '¿Estás seguro?' }, class: "btn btn-danger"
+                = button_to 'Delete', user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
   - else
     %p You dont have users in this organization

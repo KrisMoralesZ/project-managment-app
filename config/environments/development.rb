@@ -74,5 +74,5 @@ Rails.application.configure do
   # config.generators.apply_rubocop_autocorrect_after_generate!
 
   # Config for subdomain
-  config.hosts << /[a-z0-9\-]+\.localhost/
+  config.hosts << /.*\.localhost/
 end

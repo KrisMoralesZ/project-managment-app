@@ -1,12 +1,11 @@
 class Users::InvitationsController < Devise::InvitationsController
 
-  def invite
+  def create
     user = User.invite!(
       {
         email: params[:user][:email],
         name: params[:user][:name],
         role: params[:user][:role],
-        organization_id: current_user.organization_id
       },
       current_user
     )
@@ -20,6 +19,6 @@ class Users::InvitationsController < Devise::InvitationsController
 
   protected
   def after_accept_path_for(resource)
-    user_profile_path(resource)
+    user_session_path(resource)
   end
 end

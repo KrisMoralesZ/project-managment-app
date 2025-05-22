@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @project.title
+%p
+  %b Details:
+  = @project.details
+%p
+  %b Expected completion date:
+  = @project.expected_completion_date
+%p
+  %b Organization:
+  = @project.organization
+
+= link_to 'Edit', edit_project_path(@project)
+\|
+= link_to 'Back', projects_path
